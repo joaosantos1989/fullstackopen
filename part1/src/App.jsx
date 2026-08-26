@@ -56,19 +56,19 @@ const anecdotes = [
 const Anecdote = (props) => {
   return (
       <>
-        <h1>anecdote of the day</h1>
+        <h1>Anecdote of the day</h1>
         <p>{props.text}</p>
         <p>has {props.votes} votes</p>
       </>
     )
   }
 
-const Vote = (props) => {
-  const copy = [... props.vote]
-
-  copy[props.selected] +=1
-}
-
+const MostVoted = (props) => (
+  <>
+    <h1>Anecdote whit most votes</h1>
+    <p>{props.mostVotes}</p>
+  </>
+)
 
 const App = () => {
   // unicafe exercice
@@ -79,9 +79,11 @@ const App = () => {
   //anecdotes exercice
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+  const highestVotes = Math.max(...votes)
+  const mostVotedIndex = votes.indexOf(highestVotes)
 
   //handler votes
-  const Vote = () => {
+  const vote = () => {
     const copy = [...votes]
     copy[selected] += 1
     setVotes(copy)
@@ -100,7 +102,8 @@ const App = () => {
       <div>
         <Anecdote text={anecdotes[selected]} votes={votes[selected]} />
         <Button handleClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))} text='next anecdote' />
-        <Button handleClick={Vote} text='vote' />
+        <Button handleClick={vote} text='vote' />
+        <MostVoted mostVotes={anecdotes[mostVotedIndex]} />
       </div>
     </>
   )
