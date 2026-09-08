@@ -1,8 +1,5 @@
 import { useState } from 'react'
-
-const Person = ({person}) => {
-  return <li>{person.name} {person.number}</li>
-}
+import Person from './components/Person'
 
 const Filter = ({newSearch, handleSearchChange}) => (
   <div>
